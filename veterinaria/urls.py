@@ -19,8 +19,6 @@ urlpatterns = [
     path('vista_usuario', views.vista_usuario, name='vista_usuario'),
 
 
-    path('admin/', admin.site.urls)
-
 
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
