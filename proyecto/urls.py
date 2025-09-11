@@ -9,3 +9,9 @@ def custom_login(request):
 
 def home(request):
     return render(request, 'home/index.html')
+
+def custom_logout(request):
+    request.method = 'POST'
+
+def vista_usuario(request):
+    return render(request, 'usuario/index.html')
