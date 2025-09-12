@@ -4,6 +4,10 @@ from django.urls import path
 from proyecto import views as views
 from django.conf import settings
 from django.conf.urls.static import static
+from  .views import test_db  # Ajusta según tu app
+
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -17,6 +21,8 @@ urlpatterns = [
 
     path('home', views.home, name='home'),
     path('vista_usuario', views.vista_usuario, name='vista_usuario'),
+
+    path('test_db/', test_db, name='test_db'),
 
 
 
