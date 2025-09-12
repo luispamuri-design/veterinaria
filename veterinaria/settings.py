@@ -19,9 +19,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-51c@8hftu@xqp7_6pyl8j@)8r$n!a7g+r9xr82hmlf@=23()-6'
 
+SECRET_KEY = os.environ.get(
+    'DJANGO_SECRET_KEY',
+    'django-insecure-51c@8hftu@xqp7_6pyl8j@)8r$n!a7g+r9xr82hmlf@=23()-6'  # fallback por si no existe
+)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -74,17 +76,43 @@ WSGI_APPLICATION = 'veterinaria.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
+##DATABASES = {
+    #'default': {
+        #'ENGINE': 'django.db.backends.mysql',
+       # 'NAME':'veterinaria',
+       # 'USER': 'root',  # Usuario de MySQL
+    	#'PASSWORD': '',  # Cambia por tu contraseña
+    	#'HOST': 'localhost',  # Servidor de BD
+   	    #'PORT': '3306',  # Puerto de MySQL (por defecto)
+
+    #}
+#}
+if os.environ.get('VCEL_ENV'):
+    DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME':'veterinaria',
-        'USER': 'root',  # Usuario de MySQL
-    	'PASSWORD': '',  # Cambia por tu contraseña
-    	'HOST': 'localhost',  # Servidor de BD
-   	    'PORT': '3306',  # Puerto de MySQL (por defecto)
-
+        'NAME': os.environ.get('MYSQL_DATABASE', 'if0_39921479_veterinaria'),
+        'USER': os.environ.get('MYSQL_USER', 'if0_39921479'),
+        'PASSWORD': os.environ.get('MYSQL_PASSWORD', 'tu-contraseña-de-cpanel'),
+        'HOST': os.environ.get('MYSQL_HOST', 'sql210.infinityfree.com'),
+        'PORT': os.environ.get('MYSQL_PORT', '3306'),
     }
 }
+
+else:  # Local
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'veterinaria',
+            'USER': 'root',
+            'PASSWORD': '',
+            'HOST': 'localhost',
+            'PORT': '3306',
+        }
+    }
+
+
+
 
 
 # Password validation
