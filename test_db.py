@@ -5,15 +5,11 @@ from django.db.utils import OperationalError
 from django.http import HttpResponse
 
 # Configura Django para usar settings
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'veterinaria.settings')
-django.setup()
+import psycopg2
 
-db_conn = connections['default']
-
-try:
-    c = db_conn.cursor()
-    c.execute("SELECT DATABASE();")
-    row = c.fetchone()
-    print(f"✅ Conectado a la base de datos: {row[0]}")
-except OperationalError as e:
-    print(f"❌ No se pudo conectar a la base de datos: {e}")
+conn = psycopg2.connect(os.environ.get('DATABASE_URL'))
+cur = conn.cursor()
+cur.execute("SELECT 1;")
+print("✅ Conectado a la base de datos")
+cur.close()
+conn.close()
