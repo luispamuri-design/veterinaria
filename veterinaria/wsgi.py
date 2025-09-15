@@ -15,4 +15,4 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'veterinaria.settings')
 
 application = get_wsgi_application()
 
-App = application
+app = application

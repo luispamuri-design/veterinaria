@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 import pymysql
+import dj_database_url
+
 pymysql.install_as_MySQLdb()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -88,29 +90,26 @@ WSGI_APPLICATION = 'veterinaria.wsgi.application'
 
     #}
 #}
-if os.environ.get('VCEL_ENV'):
-    DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('MYSQL_DATABASE', 'if0_39921479_veterinaria'),
-        'USER': os.environ.get('MYSQL_USER', 'if0_39921479'),
-        'PASSWORD': os.environ.get('MYSQL_PASSWORD', 'tu-contraseña-de-cpanel'),
-        'HOST': os.environ.get('MYSQL_HOST', 'sql210.infinityfree.com'),
-        'PORT': os.environ.get('MYSQL_PORT', '3306'),
-    }
-}
+#if os.environ.get('VCEL_ENV'):
+#    DATABASES = {
+ #   'default': {
+  #      'ENGINE': 'django.db.backends.mysql',
+  #      'NAME': os.environ.get('MYSQL_DATABASE', 'if0_39921479_veterinaria'),
+  #      'USER': os.environ.get('MYSQL_USER', 'if0_39921479'),
+  #      'PASSWORD': os.environ.get('MYSQL_PASSWORD', 'tu-contraseña-de-cpanel'),
+  #      'HOST': os.environ.get('MYSQL_HOST', 'sql210.infinityfree.com'),
+  #      'PORT': os.environ.get('MYSQL_PORT', '3306'),
+   # }
+#}
 
-else:  # Local
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'veterinaria',
-            'USER': 'root',
-            'PASSWORD': '',
-            'HOST': 'localhost',
-            'PORT': '3306',
-        }
-    }
+#else:  # LocalDATABASES = {'default': {   'ENGINE': 'django.db.backends.mysql', 'NAME': 'veterinaria', 'USER': 'root', 'PASSWORD': '', 'HOST': 'localhost','PORT': '3306',
+  #      }
+  #  }
+DATABASES = {
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL')
+    )
+}
 
 
 
