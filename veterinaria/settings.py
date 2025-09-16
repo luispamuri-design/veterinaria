@@ -97,7 +97,7 @@ if DEBUG:
 else :
     DATABASES = {
         'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL'),
+        default=os.environ.get('psql postgresql://neondb_owner:npg_urQo0Ui4cwXI@ep-sweet-resonance-ac4prc9g-pooler.sa-east-1.aws.neon.tech/veterinaria?sslmode=require&channel_binding=require'),
         conn_max_age=600,
         ssl_require=True
     )
