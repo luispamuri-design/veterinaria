@@ -28,7 +28,9 @@ SECRET_KEY = os.environ.get(
     'django-insecure-51c@8hftu@xqp7_6pyl8j@)8r$n!a7g+r9xr82hmlf@=23()-6'  # fallback por si no existe
 )
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+##DEBUG = True
+
+DEBUG = os.environ.get("DEBUG", "True") == "True"
 
 ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1']
 
@@ -43,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'Home.apps.HomeConfig',
 ]
 
 MIDDLEWARE = [
@@ -76,41 +79,45 @@ TEMPLATES = [
 WSGI_APPLICATION = 'veterinaria.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
+ #Database
+#https://docs.djangoproject.com/en/5.2/ref/settings/#databases
+if DEBUG:
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+       'NAME':'veterinaria',
+        'USER': 'root',  # Usuario de MySQL
+    	'PASSWORD': '',  # Cambia por tu contraseña
+    	'HOST': 'localhost',  # Servidor de BD
+   	    'PORT': '3306',  # Puerto de MySQL (por defecto)
 
-##DATABASES = {
-    #'default': {
-        #'ENGINE': 'django.db.backends.mysql',
-       # 'NAME':'veterinaria',
-       # 'USER': 'root',  # Usuario de MySQL
-    	#'PASSWORD': '',  # Cambia por tu contraseña
-    	#'HOST': 'localhost',  # Servidor de BD
-   	    #'PORT': '3306',  # Puerto de MySQL (por defecto)
+    }
+}
 
-    #}
-#}
-#if os.environ.get('VCEL_ENV'):
-#    DATABASES = {
- #   'default': {
-  #      'ENGINE': 'django.db.backends.mysql',
-  #      'NAME': os.environ.get('MYSQL_DATABASE', 'if0_39921479_veterinaria'),
-  #      'USER': os.environ.get('MYSQL_USER', 'if0_39921479'),
-  #      'PASSWORD': os.environ.get('MYSQL_PASSWORD', 'tu-contraseña-de-cpanel'),
-  #      'HOST': os.environ.get('MYSQL_HOST', 'sql210.infinityfree.com'),
-  #      'PORT': os.environ.get('MYSQL_PORT', '3306'),
-   # }
-#}
+else :
+    DATABASES = {
+        'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL'),
+        conn_max_age=600,
+        ssl_require=True
+    )
+    
+ }
+
 
 #else:  # LocalDATABASES = {'default': {   'ENGINE': 'django.db.backends.mysql', 'NAME': 'veterinaria', 'USER': 'root', 'PASSWORD': '', 'HOST': 'localhost','PORT': '3306',
   #      }
   #  }
-DATABASES = {
-    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
-}
+#DATABASES = {
+    #'default': dj_database_url.config(
+        #default=os.environ.get('DATABASE_URL'),
+        #conn_max_age=600,
+        #ssl_require=True
+    #)
+#}
 
-
-
+##DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+##SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 
 # Password validation
