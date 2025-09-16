@@ -2,19 +2,10 @@
 {
   "version": 2,
   "builds": [
-    {
-      "src": "veterinaria/wsgi.py",
-      "use": "@vercel/python",
-      "config": {
-        "maxLambdaSize": "50mb"
-      }
-    }
+    { "src": "veterinaria/wsgi.py", "use": "@vercel/python" }
   ],
   "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "veterinaria/wsgi.py"
-    }
+    { "src": "/(.*)", "dest": "veterinaria/wsgi.py" }
   ]
 }
 
