@@ -15,3 +15,12 @@ def custom_logout(request):
 
 def vista_usuario(request):
     return render(request, 'usuario/index.html')
+
+
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.home, name='home'),
+]
+
