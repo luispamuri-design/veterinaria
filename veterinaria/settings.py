@@ -28,8 +28,8 @@ SECRET_KEY = os.environ.get(
     'django-insecure-51c@8hftu@xqp7_6pyl8j@)8r$n!a7g+r9xr82hmlf@=23()-6'  # fallback por si no existe
 )
 # SECURITY WARNING: don't run with debug turned on in production!
-##DEBUG = True
-#DEBUG = os.environ.get("DEBUG", "True") == "True"
+##DEBUG = false
+DEBUG = os.environ.get("DEBUG", "True") == "True"
 
 
 ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1']
@@ -115,7 +115,7 @@ else :
     #)
 #}
 
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+#DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 ##SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 
