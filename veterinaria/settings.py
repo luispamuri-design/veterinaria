@@ -81,7 +81,16 @@ WSGI_APPLICATION = 'veterinaria.wsgi.application'
  #Database
 #https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 if DEBUG:
-    DATABASES = {
+     DATABASES = {
+        'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL'),
+        conn_max_age=600,
+        ssl_require=True
+    )
+    
+ }
+else :
+     DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
        'NAME':'veterinaria',
@@ -92,16 +101,7 @@ if DEBUG:
 
     }
 }
-
-else :
-    DATABASES = {
-        'default': dj_database_url.config(
-        default=os.environ.get('psql postgresql://neondb_owner:npg_urQo0Ui4cwXI@ep-sweet-resonance-ac4prc9g-pooler.sa-east-1.aws.neon.tech/veterinaria?sslmode=require&channel_binding=require'),
-        conn_max_age=600,
-        ssl_require=True
-    )
-    
- }
+  
 
 
 #else:  # LocalDATABASES = {'default': {   'ENGINE': 'django.db.backends.mysql', 'NAME': 'veterinaria', 'USER': 'root', 'PASSWORD': '', 'HOST': 'localhost','PORT': '3306',
