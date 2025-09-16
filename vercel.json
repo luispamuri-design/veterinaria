@@ -2,14 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "VercelDeploy/wsgi.py",
+      "src": "veterinaria/wsgi.py",
       "use": "@vercel/python"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "VercelDeploy/wsgi.py"
+      "dest": "veterinaria/wsgi.py"
     }
   ]
 }
