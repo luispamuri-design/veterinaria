@@ -30,10 +30,11 @@ SECRET_KEY = os.environ.get(
 # SECURITY WARNING: don't run with debug turned on in production!
 ##DEBUG = false
 DEBUG = os.environ.get("DEBUG", "True") == "True"
+DEBUG = True
+
 
 
 ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1']
-
 
 # Application definition
 
