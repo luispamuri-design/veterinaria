@@ -40,7 +40,8 @@ ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
-    'proyecto',
+   # 'proyecto',
+    'proyecto.apps.ProyectoConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -48,7 +49,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'proyecto.app.ProyectoConfig',
 ]
 
 MIDDLEWARE = [
