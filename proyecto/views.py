@@ -50,3 +50,7 @@ def vista_usuario(request):
    # tipos=Tipo.objects.exclude(nombre_in=['root','cliente'])
     return render(request, 'usuario/index.html',{'usuario': request.user})
 
+from django.http import HttpResponse
+
+def home(request):
+    return HttpResponse("¡Django está funcionando correctamente en Vercel!")
